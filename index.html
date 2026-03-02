@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Potporli | Modern Interactive Platform</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="src/styles/main.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: 'hsl(var(--primary))',
+                        secondary: 'hsl(var(--secondary))',
+                        accent: 'hsl(var(--accent))',
+                        background: 'hsl(var(--background))',
+                        foreground: 'hsl(var(--foreground))',
+                    },
+                    borderRadius: {
+                        'xl': 'calc(var(--radius) + 4px)',
+                        '2xl': 'calc(var(--radius) * 2)',
+                    },
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="bg-background text-foreground selection:bg-primary selection:text-white">
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 glass border-b border-white/5 px-6 py-4">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <a href="#" class="flex items-center gap-3">
+                <img src="src/assets/icon.png" alt="Avatar"
+                    class="w-8 h-8 rounded-full border border-accent/50 group-hover:scale-110 transition-transform">
+                <span class="text-2xl font-extrabold tracking-tighter gradient-text">THARUSHA</span>
+            </a>
+
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex items-center gap-8">
+                <nav class="flex items-center gap-8">
+                    <a href="#hero" class="text-sm font-bold hover:text-accent transition-colors">Home</a>
+                    <a href="#about" class="text-sm font-bold hover:text-accent transition-colors">About</a>
+                    <a href="#skills" class="text-sm font-bold hover:text-accent transition-colors">Skills</a>
+                    <a href="#projects" class="text-sm font-bold hover:text-accent transition-colors">Projects</a>
+                    <a href="#experience" class="text-sm font-bold hover:text-accent transition-colors">Experience</a>
+                </nav>
+
+                <!-- Theme Toggle Desktop -->
+                <button
+                    class="theme-toggle w-10 h-10 rounded-full glass border border-white/10 flex items-center justify-center hover:border-accent/50 transition-all">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="sun-icon h-5 w-5" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m12.728 0l-.707-.707M6.343 6.343l-.707-.707M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="moon-icon h-5 w-5 hidden" fill="none"
+                        viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                    </svg>
+                </button>
+
+                <a href="#contact"
+                    class="px-6 py-2.5 rounded-full bg-white text-black font-bold text-sm hover:scale-105 transition-all shadow-lg shadow-white/5">
+                    Let's Talk
+                </a>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <div class="flex items-center gap-4 md:hidden">
+                <button
+                    class="theme-toggle w-10 h-10 rounded-full glass border border-white/10 flex items-center justify-center hover:border-accent/50 transition-all">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="sun-icon h-5 w-5" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m12.728 0l-.707-.707M6.343 6.343l-.707-.707M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="moon-icon h-5 w-5 hidden" fill="none"
+                        viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                    </svg>
+                </button>
+                <button id="mobile-menu-btn" class="text-foreground/70 hover:text-foreground">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16m-7 6h7" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Overlay for mobile menu -->
+    <div id="overlay" class="hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-[59]"></div>
+
+    <!-- Mobile Sidebar -->
+    <aside id="sidebar"
+        class="fixed top-0 left-0 h-full w-80 glass-dark z-[60] -translate-x-full transition-transform duration-300 p-8 flex flex-col">
+        <div class="flex items-center justify-between mb-12">
+            <span class="text-3xl font-black gradient-text tracking-tighter">THARUSHA</span>
+            <button id="close-menu" class="text-foreground/70 hover:text-foreground p-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+        </div>
+        <nav class="flex flex-col gap-6 mb-12">
+            <a href="#hero" class="text-2xl font-black hover:text-accent transition-colors close-on-click">Home</a>
+            <a href="#about" class="text-2xl font-black hover:text-accent transition-colors close-on-click">About</a>
+            <a href="#skills" class="text-2xl font-black hover:text-accent transition-colors close-on-click">Skills</a>
+            <a href="#projects"
+                class="text-2xl font-black hover:text-accent transition-colors close-on-click">Projects</a>
+            <a href="#experience"
+                class="text-2xl font-black hover:text-accent transition-colors close-on-click">Experience</a>
+            <a href="#contact"
+                class="text-2xl font-black hover:text-accent transition-colors close-on-click">Contact</a>
+        </nav>
+        <div class="mt-auto border-t border-white/5 pt-12">
+            <p class="text-xs font-bold uppercase tracking-widest text-foreground/40 mb-6">Connect</p>
+            <div class="flex gap-4">
+                <a href="https://github.com/tharushaarunalu"
+                    class="w-12 h-12 rounded-2xl glass border-white/5 flex items-center justify-center hover:bg-accent hover:text-white transition-all">
+                    <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                        <path
+                            d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.43.372.823 1.102.823 2.222 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" />
+                    </svg>
+                </a>
+                <a href="#"
+                    class="w-12 h-12 rounded-2xl glass border-white/5 flex items-center justify-center hover:bg-accent hover:text-white transition-all">
+                    <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                        <path
+                            d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section id="hero" class="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
+            <!-- Background Image with Overlay -->
+            <div class="absolute inset-0 z-0">
+                <img src="src/assets/hero_illustration.png" alt="Engineering Logic" class="w-full h-full object-cover">
+                <div class="absolute inset-0 bg-gradient-to-b from-background/60 via-background/80 to-background"></div>
+            </div>
+
+            <div class="relative z-10 max-w-5xl mx-auto px-6 text-center reveal">
+                <div
+                    class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass text-xs font-bold tracking-widest text-accent uppercase mb-6 border border-accent/20">
+                    <span class="relative flex h-2 w-2">
+                        <span
+                            class="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-2 w-2 bg-accent"></span>
+                    </span>
+                    System: Online | Available for Hire
+                </div>
+                <h1 class="text-6xl md:text-8xl font-black tracking-tighter mb-8 leading-[0.9]">
+                    Engineering <span class="gradient-text">Logic.</span><br>
+                    Designing <span class="text-white">Emotion.</span>
+                </h1>
+                <p class="text-xl text-foreground/60 max-w-2xl mx-auto mb-12 leading-relaxed">
+                    I build scalable digital infrastructure that scales with your ambition. Specializing in
+                    high-performance web applications and intuitive user experiences.
+                </p>
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                    <a href="#projects"
+                        class="w-full sm:w-auto px-8 py-4 rounded-2xl bg-white text-black font-bold text-lg hover:scale-105 transition-all shadow-xl shadow-white/5 flex items-center justify-center gap-2">
+                        View Projects <span>→</span>
+                    </a>
+                    <a href="#contact"
+                        class="w-full sm:w-auto px-8 py-4 rounded-2xl glass border border-white/10 font-bold text-lg hover:bg-white/5 transition-all">
+                        Contact Me
+                    </a>
+                    <a href="resume.pdf"
+                        class="w-full sm:w-auto px-8 py-4 rounded-2xl glass border border-white/10 font-bold text-lg hover:bg-white/5 transition-all opacity-70 hover:opacity-100">
+                        Resume
+                    </a>
+                </div>
+            </div>
+
+            <!-- Scroll Indicator -->
+            <div
+                class="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-30 animate-bounce">
+                <div class="w-1 h-12 rounded-full border border-white/20 flex items-start justify-center p-1">
+                    <div class="w-1 h-3 bg-white rounded-full"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Me Section -->
+        <section id="about" class="py-32 px-6 bg-card/30">
+            <div class="max-w-7xl mx-auto">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+                    <div class="reveal">
+                        <div class="relative inline-block mb-8">
+                            <div class="absolute -inset-4 bg-accent/20 blur-2xl rounded-full"></div>
+                            <img src="src/assets/icon.png" alt="Tharusha Arunalu"
+                                class="relative w-72 h-72 object-cover rounded-[3rem] border-2 border-accent/20">
+                            <div
+                                class="absolute -bottom-4 -right-4 glass p-4 rounded-2xl border border-accent/30 animate-bounce">
+                                <span class="text-3xl">🚀</span>
+                            </div>
+                        </div>
+                        <h2 class="text-4xl md:text-5xl font-black mb-6">Software Engineer & <br><span
+                                class="gradient-text">Product Architect</span></h2>
+                        <p class="text-lg text-foreground/60 leading-relaxed mb-8">
+                            With over 4 years of experience, I specialize in building scalable digital infrastructure
+                            that scales with your ambition. I bridge the gap between complex engineering logic and
+                            intuitive, beautiful design.
+                        </p>
+                        <div class="grid grid-cols-2 gap-6">
+                            <div class="glass p-6 rounded-2xl border-white/5">
+                                <span class="text-3xl font-black gradient-text">4+</span>
+                                <p class="text-xs font-bold uppercase tracking-widest text-foreground/40 mt-1">Years
+                                    Experience</p>
+                            </div>
+                            <div class="glass p-6 rounded-2xl border-white/5">
+                                <span class="text-3xl font-black text-white">50+</span>
+                                <p class="text-xs font-bold uppercase tracking-widest text-foreground/40 mt-1">Projects
+                                    Delivered</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="reveal delay-200">
+                        <div class="glass p-10 rounded-[3rem] border-white/10 relative overflow-hidden">
+                            <div class="absolute top-0 right-0 p-8 opacity-10">
+                                <svg class="w-32 h-32" fill="currentColor" viewBox="0 0 24 24">
+                                    <path
+                                        d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z" />
+                                </svg>
+                            </div>
+                            <h3 class="text-2xl font-bold mb-6">Technical Philosophy</h3>
+                            <p class="text-foreground/70 leading-relaxed mb-6">
+                                I believe that every line of code should solve a business problem. My approach is rooted
+                                in **Precision, Performance, and Purpose**. Whether it's architecting a microservices
+                                backend or crafting a fluid UI interaction, I focus on the ROI of design.
+                            </p>
+                            <ul class="space-y-4">
+                                <li class="flex items-center gap-3">
+                                    <div class="w-2 h-2 rounded-full bg-accent shadow-[0_0_10px_var(--spark-blue)]">
+                                    </div>
+                                    <span class="text-sm font-medium">Scalable Systems Architecture</span>
+                                </li>
+                                <li class="flex items-center gap-3">
+                                    <div class="w-2 h-2 rounded-full bg-accent shadow-[0_0_10px_var(--spark-blue)]">
+                                    </div>
+                                    <span class="text-sm font-medium">User-Centric Interactive Design</span>
+                                </li>
+                                <li class="flex items-center gap-3">
+                                    <div class="w-2 h-2 rounded-full bg-accent shadow-[0_0_10px_var(--spark-blue)]">
+                                    </div>
+                                    <span class="text-sm font-medium">Cloud-Native Specialization (AWS/Docker)</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience Section -->
+        <section id="experience" class="py-32 px-6">
+            <div class="max-w-7xl mx-auto">
+                <div class="text-center mb-20 reveal">
+                    <h2 class="text-4xl md:text-5xl font-extrabold mb-4">Professional <span
+                            class="gradient-text">Journey</span></h2>
+                    <p class="text-foreground/40 max-w-xl mx-auto">A timeline of engineering excellence and product
+                        leadership.</p>
+                </div>
+
+                <div class="max-w-3xl mx-auto reveal">
+                    <div class="timeline-item">
+                        <div class="glass p-8 rounded-3xl border-white/5 hover:border-accent/30 transition-all">
+                            <div class="flex flex-col md:flex-row md:items-center justify-between mb-4 gap-2">
+                                <h3 class="text-xl font-bold">Senior Frontend Architect</h3>
+                                <span
+                                    class="text-xs font-bold uppercase tracking-widest text-accent px-3 py-1 rounded-full bg-accent/10">2024
+                                    - Present</span>
+                            </div>
+                            <h4 class="text-sm font-medium text-white/60 mb-6">Quantum Systems Tech</h4>
+                            <ul class="space-y-3 text-sm text-foreground/50 list-disc pl-5">
+                                <li>Leading the architecture of a next-gen micro-frontend ecosystem.</li>
+                                <li>Reduced initial bundle sizes by 45% using advanced tree-shaking and module
+                                    federation.</li>
+                                <li>Mentoring a team of 12 developers on modern React/Next.js best practices.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="glass p-8 rounded-3xl border-white/5 hover:border-accent/30 transition-all">
+                            <div class="flex flex-col md:flex-row md:items-center justify-between mb-4 gap-2">
+                                <h3 class="text-xl font-bold">Full Stack Developer</h3>
+                                <span
+                                    class="text-xs font-bold uppercase tracking-widest text-white/40 px-3 py-1 rounded-full bg-white/5">2022
+                                    - 2024</span>
+                            </div>
+                            <h4 class="text-sm font-medium text-white/60 mb-6">Nexus Creative Agency</h4>
+                            <ul class="space-y-3 text-sm text-foreground/50 list-disc pl-5">
+                                <li>Developed custom e-commerce solutions for 20+ enterprise clients.</li>
+                                <li>Implemented complex data visualization dashboards using D3.js and Socket.io.</li>
+                                <li>Integrated multi-provider payment systems (Stripe, PayPal, Adyen).</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="glass p-8 rounded-3xl border-white/5 hover:border-accent/30 transition-all">
+                            <div class="flex flex-col md:flex-row md:items-center justify-between mb-4 gap-2">
+                                <h3 class="text-xl font-bold">UI/UX Engineer</h3>
+                                <span
+                                    class="text-xs font-bold uppercase tracking-widest text-white/40 px-3 py-1 rounded-full bg-white/5">2021
+                                    - 2022</span>
+                            </div>
+                            <h4 class="text-sm font-medium text-white/60 mb-6">Spark Digital Labs</h4>
+                            <ul class="space-y-3 text-sm text-foreground/50 list-disc pl-5">
+                                <li>Designed and implemented a modular design system used across 5 internal products.
+                                </li>
+                                <li>Collaborated closely with stakeholders to translate business requirements into
+                                    wireframes.</li>
+                                <li>Optimized user flows reducing friction by 30% in core checkout processes.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section id="testimonials" class="py-32 px-6 bg-card/30">
+            <div class="max-w-7xl mx-auto">
+                <div class="text-center mb-20 reveal">
+                    <h2 class="text-4xl md:text-5xl font-extrabold mb-4">Trusted by <span
+                            class="gradient-text">Innovators</span></h2>
+                    <p class="text-foreground/40 max-w-xl mx-auto">Direct feedback from partners and clients across the
+                        tech ecosystem.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Testimonial 1 -->
+                    <div class="glass p-10 rounded-[2.5rem] border-white/5 reveal">
+                        <div class="flex gap-1 mb-6">
+                            <span class="text-accent text-xl">★★★★★</span>
+                        </div>
+                        <p class="text-lg font-medium italic mb-8 text-foreground/80">
+                            "Tharusha's ability to simplify complex architectures into fluid, manageable components is
+                            unmatched. A true engineering partner."
+                        </p>
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-full bg-accent/20"></div>
+                            <div>
+                                <h4 class="font-bold">Sarah Jenkins</h4>
+                                <p class="text-xs text-white/40 uppercase tracking-widest">CTO @ Quantum Systems</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Testimonial 2 -->
+                    <div class="glass p-10 rounded-[3rem] border-white/5 reveal delay-100">
+                        <div class="flex gap-1 mb-6">
+                            <span class="text-accent text-xl">★★★★★</span>
+                        </div>
+                        <p class="text-lg font-medium italic mb-8 text-foreground/80">
+                            "The design system Tharusha built for us completely transformed our development speed. It's
+                            beautiful, robust, and scalable."
+                        </p>
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-full bg-secondary/20"></div>
+                            <div>
+                                <h4 class="font-bold">Marcus Thorne</h4>
+                                <p class="text-xs text-white/40 uppercase tracking-widest">Lead Designer @ Nexus</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Testimonial 3 -->
+                    <div class="glass p-10 rounded-[2.5rem] border-white/5 reveal delay-200">
+                        <div class="flex gap-1 mb-6">
+                            <span class="text-accent text-xl">★★★★★</span>
+                        </div>
+                        <p class="text-lg font-medium italic mb-8 text-foreground/80">
+                            "One of the few developers who actually understands user psychology. Our retention rates
+                            doubled after the recent overhaul."
+                        </p>
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-full bg-primary/20"></div>
+                            <div>
+                                <h4 class="font-bold">Elena Rodriguez</h4>
+                                <p class="text-xs text-white/40 uppercase tracking-widest">Product Manager @ Spark</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="projects" class="py-32 px-6 bg-card/10">
+            <div class="max-w-7xl mx-auto">
+                <div class="flex flex-col md:flex-row justify-between items-end mb-20 reveal">
+                    <div>
+                        <h2 class="text-4xl md:text-5xl font-extrabold mb-4">Featured <span
+                                class="gradient-text">Work</span></h2>
+                        <p class="text-foreground/40 max-w-xl">Engineering logic applied to digital products. Every
+                            project is a case study in performance.</p>
+                    </div>
+                    <a href="https://github.com/tharushaarunalu" target="_blank"
+                        class="hidden md:flex items-center gap-2 text-accent font-bold hover:gap-4 transition-all pb-2">
+                        View All on GitHub <span>→</span>
+                    </a>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                    <!-- Project 1 -->
+                    <div class="group reveal">
+                        <div class="relative rounded-[2.5rem] overflow-hidden glass border-white/5 mb-8">
+                            <img src="src/assets/project_ecommerce.png" alt="E-Commerce Platform"
+                                class="w-full aspect-video object-cover group-hover:scale-110 transition-transform duration-700">
+                            <div
+                                class="absolute inset-0 bg-gradient-to-t from-background/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-8">
+                                <div class="flex gap-4">
+                                    <a href="#"
+                                        class="w-10 h-10 rounded-full glass flex items-center justify-center hover:bg-accent hover:text-white transition-all"><svg
+                                            class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                                        </svg></a>
+                                    <a href="#"
+                                        class="w-10 h-10 rounded-full glass flex items-center justify-center hover:bg-accent hover:text-white transition-all"><svg
+                                            class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                            <path
+                                                d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.43.372.823 1.102.823 2.222 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" />
+                                        </svg></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span
+                                class="px-3 py-1 rounded-full bg-accent/10 border border-accent/20 text-[10px] font-bold text-accent uppercase tracking-widest">Next.js</span>
+                            <span
+                                class="px-3 py-1 rounded-full bg-accent/10 border border-accent/20 text-[10px] font-bold text-accent uppercase tracking-widest">Node.js</span>
+                            <span
+                                class="px-3 py-1 rounded-full bg-accent/10 border border-accent/20 text-[10px] font-bold text-accent uppercase tracking-widest">Stripe</span>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-3">E-Commerce Ecosystem</h3>
+                        <p class="text-foreground/50 text-sm leading-relaxed">
+                            A high-performance marketplace with real-time inventory tracking and integrated payment
+                            gateways. Improved conversion rates by 25%.
+                        </p>
+                    </div>
+
+                    <!-- Project 2 -->
+                    <div class="group reveal delay-100">
+                        <div class="relative rounded-[2.5rem] overflow-hidden glass border-white/5 mb-8">
+                            <img src="src/assets/project_dashboard.png" alt="FinTech Dashboard"
+                                class="w-full aspect-video object-cover group-hover:scale-110 transition-transform duration-700">
+                            <div
+                                class="absolute inset-0 bg-gradient-to-t from-background/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-8">
+                                <div class="flex gap-4">
+                                    <a href="#"
+                                        class="w-10 h-10 rounded-full glass flex items-center justify-center hover:bg-accent hover:text-white transition-all"><svg
+                                            class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                                        </svg></a>
+                                    <a href="#"
+                                        class="w-10 h-10 rounded-full glass flex items-center justify-center hover:bg-accent hover:text-white transition-all"><svg
+                                            class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                            <path
+                                                d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.43.372.823 1.102.823 2.222 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" />
+                                        </svg></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span
+                                class="px-3 py-1 rounded-full bg-secondary/10 border border-secondary/20 text-[10px] font-bold text-secondary uppercase tracking-widest">React</span>
+                            <span
+                                class="px-3 py-1 rounded-full bg-secondary/10 border border-secondary/20 text-[10px] font-bold text-secondary uppercase tracking-widest">D3.js</span>
+                            <span
+                                class="px-3 py-1 rounded-full bg-secondary/10 border border-secondary/20 text-[10px] font-bold text-secondary uppercase tracking-widest">Python</span>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-3">FinTech Analytical Dashboard</h3>
+                        <p class="text-foreground/50 text-sm leading-relaxed">
+                            A real-time data visualization platform for financial institutions. Handled 10k+
+                            events/second with sub-100ms latency.
+                        </p>
+                    </div>
+
+                    <!-- Project 3 -->
+                    <div class="group reveal delay-200">
+                        <div class="relative rounded-[2.5rem] overflow-hidden glass border-white/5 mb-8">
+                            <img src="src/assets/project_social.png" alt="Social Platform"
+                                class="w-full aspect-video object-cover group-hover:scale-110 transition-transform duration-700">
+                            <div
+                                class="absolute inset-0 bg-gradient-to-t from-background/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-8">
+                                <div class="flex gap-4">
+                                    <a href="#"
+                                        class="w-10 h-10 rounded-full glass flex items-center justify-center hover:bg-accent hover:text-white transition-all"><svg
+                                            class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                                        </svg></a>
+                                    <a href="#"
+                                        class="w-10 h-10 rounded-full glass flex items-center justify-center hover:bg-accent hover:text-white transition-all"><svg
+                                            class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                            <path
+                                                d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.43.372.823 1.102.823 2.222 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" />
+                                        </svg></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span
+                                class="px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-[10px] font-bold text-primary uppercase tracking-widest">Vue.js</span>
+                            <span
+                                class="px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-[10px] font-bold text-primary uppercase tracking-widest">Firebase</span>
+                            <span
+                                class="px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-[10px] font-bold text-primary uppercase tracking-widest">WebRTC</span>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-3">Community Social Platform</h3>
+                        <p class="text-foreground/50 text-sm leading-relaxed">
+                            A real-time social ecosystem featuring video conferencing and collaborative whiteboards.
+                            Scaled to 5k active users.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="skills" class="py-32 px-6">
+            <div class="max-w-7xl mx-auto">
+                <div class="text-center mb-20 reveal">
+                    <h2 class="text-4xl md:text-5xl font-extrabold mb-4">Technical <span
+                            class="gradient-text">Mastery</span></h2>
+                    <p class="text-foreground/40 max-w-xl mx-auto">A multi-disciplinary stack designed for scalability
+                        and performance.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                    <!-- Frontend -->
+                    <div class="glass p-8 rounded-3xl border-white/5 reveal">
+                        <div class="w-12 h-12 rounded-xl bg-accent/20 flex items-center justify-center mb-6">
+                            <svg class="w-6 h-6 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold mb-6">Frontend</h3>
+                        <div class="space-y-6">
+                            <div>
+                                <div class="flex justify-between mb-2"><span class="text-sm font-medium">React /
+                                        Next.js</span><span class="text-xs text-accent font-bold">95%</span></div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 95%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between mb-2"><span class="text-sm font-medium">Tailwind
+                                        CSS</span><span class="text-xs text-accent font-bold">90%</span></div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 90%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between mb-2"><span
+                                        class="text-sm font-medium">TypeScript</span><span
+                                        class="text-xs text-accent font-bold">85%</span></div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 85%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Backend -->
+                    <div class="glass p-8 rounded-3xl border-white/5 reveal delay-100">
+                        <div class="w-12 h-12 rounded-xl bg-secondary/20 flex items-center justify-center mb-6">
+                            <svg class="w-6 h-6 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold mb-6">Backend</h3>
+                        <div class="space-y-6">
+                            <div>
+                                <div class="flex justify-between mb-2"><span class="text-sm font-medium">Node.js /
+                                        Express</span><span class="text-xs text-secondary font-bold">90%</span></div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress !bg-secondary" style="width: 90%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between mb-2"><span class="text-sm font-medium">Python /
+                                        Django</span><span class="text-xs text-secondary font-bold">80%</span></div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress !bg-secondary" style="width: 80%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between mb-2"><span class="text-sm font-medium">PHP /
+                                        MySQL</span><span class="text-xs text-secondary font-bold">85%</span></div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress !bg-secondary" style="width: 85%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Database -->
+                    <div class="glass p-8 rounded-3xl border-white/5 reveal delay-200">
+                        <div class="w-12 h-12 rounded-xl bg-primary/20 flex items-center justify-center mb-6">
+                            <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M4 7v10c0 2.21 3.58 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.58 4 8 4s8-1.79 8-4M4 7c0-2.21 3.58-4 8-4s8 1.79 8 4m0 5c0 2.21-3.58 4-8 4s-8-1.79-8-4" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold mb-6">Database</h3>
+                        <div class="space-y-6">
+                            <div>
+                                <div class="flex justify-between mb-2"><span
+                                        class="text-sm font-medium">PostgreSQL</span><span
+                                        class="text-xs text-primary font-bold">85%</span></div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress !bg-primary" style="width: 85%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between mb-2"><span
+                                        class="text-sm font-medium">MongoDB</span><span
+                                        class="text-xs text-primary font-bold">90%</span></div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress !bg-primary" style="width: 90%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between mb-2"><span
+                                        class="text-sm font-medium">Redis</span><span
+                                        class="text-xs text-primary font-bold">75%</span></div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress !bg-primary" style="width: 75%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tools -->
+                    <div class="glass p-8 rounded-3xl border-white/5 reveal delay-300">
+                        <div class="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center mb-6">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold mb-6">Tools</h3>
+                        <div class="space-y-6">
+                            <div>
+                                <div class="flex justify-between mb-2"><span class="text-sm font-medium">Docker /
+                                        K8s</span><span class="text-xs text-white/60 font-bold">80%</span></div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress !bg-white/40" style="width: 80%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between mb-2"><span class="text-sm font-medium">AWS /
+                                        CI/CD</span><span class="text-xs text-white/60 font-bold">85%</span></div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress !bg-white/40" style="width: 85%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between mb-2"><span class="text-sm font-medium">Git /
+                                        Figma</span><span class="text-xs text-white/60 font-bold">95%</span></div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress !bg-white/40" style="width: 95%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-32 px-6">
+            <div class="max-w-7xl mx-auto">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-16 reveal">
+                    <div>
+                        <h2 class="text-4xl md:text-5xl font-black mb-8">Ready to <br><span
+                                class="gradient-text">Collaborate?</span></h2>
+                        <p class="text-lg text-foreground/50 mb-12 leading-relaxed max-w-md">
+                            Have a mission-critical project or a complex engineering challenge? Let's build something
+                            extraordinary together.
+                        </p>
+
+                        <div class="space-y-8">
+                            <div class="flex items-center gap-6 group">
+                                <div
+                                    class="w-12 h-12 rounded-2xl glass border-white/5 flex items-center justify-center text-accent group-hover:scale-110 transition-transform">
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                                    </svg>
+                                </div>
+                                <div>
+                                    <p class="text-xs font-bold uppercase tracking-widest text-foreground/40 mb-1">Email
+                                    </p>
+                                    <p class="text-lg font-bold">hello@tharusha.io</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-6 group">
+                                <div
+                                    class="w-12 h-12 rounded-2xl glass border-white/5 flex items-center justify-center text-secondary group-hover:scale-110 transition-transform">
+                                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                        <path
+                                            d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+                                    </svg>
+                                </div>
+                                <div>
+                                    <p class="text-xs font-bold uppercase tracking-widest text-foreground/40 mb-1">
+                                        LinkedIn</p>
+                                    <p class="text-lg font-bold">in/tharushaarunalu</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="glass p-12 rounded-[3.5rem] border-white/5 shadow-2xl">
+                        <form class="space-y-6">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <label
+                                        class="block text-xs font-bold uppercase tracking-widest text-foreground/40 mb-3">Name</label>
+                                    <input type="text" placeholder="John Doe"
+                                        class="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 outline-none focus:border-accent transition-colors">
+                                </div>
+                                <div>
+                                    <label
+                                        class="block text-xs font-bold uppercase tracking-widest text-foreground/40 mb-3">Email</label>
+                                    <input type="email" placeholder="john@example.com"
+                                        class="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 outline-none focus:border-accent transition-colors">
+                                </div>
+                            </div>
+                            <div>
+                                <label
+                                    class="block text-xs font-bold uppercase tracking-widest text-foreground/40 mb-3">Message</label>
+                                <textarea rows="5" placeholder="Let's talk about your next project..."
+                                    class="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 outline-none focus:border-accent transition-colors"></textarea>
+                            </div>
+                            <button type="button"
+                                class="w-full py-5 rounded-2xl bg-gradient-to-r from-accent to-primary font-black text-xl hover:opacity-90 active:scale-[0.98] transition-all shadow-xl shadow-accent/20">
+                                Send Message
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-card border-t border-white/5 py-20 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-20">
+                <div class="md:col-span-2">
+                    <a href="#"
+                        class="text-3xl font-black gradient-text mb-6 inline-block tracking-tighter">THARUSHA</a>
+                    <p class="text-foreground/40 max-w-sm mb-8 leading-relaxed">
+                        Architecting the future through precision code and intuitive design. Let's engineering something
+                        meaningful.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="https://github.com/tharushaarunalu"
+                            class="w-10 h-10 rounded-full glass border-white/10 flex items-center justify-center hover:bg-accent hover:text-white transition-all">
+                            <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path
+                                    d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.43.372.823 1.102.823 2.222 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" />
+                            </svg>
+                        </a>
+                        <a href="#"
+                            class="w-10 h-10 rounded-full glass border-white/10 flex items-center justify-center hover:bg-accent hover:text-white transition-all">
+                            <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path
+                                    d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-6 uppercase tracking-widest text-xs text-foreground/40">Navigation</h4>
+                    <ul class="space-y-4 text-foreground/50 text-sm font-medium">
+                        <li><a href="#hero" class="hover:text-accent transition-colors">Home</a></li>
+                        <li><a href="#about" class="hover:text-accent transition-colors">About</a></li>
+                        <li><a href="#skills" class="hover:text-accent transition-colors">Skills</a></li>
+                        <li><a href="#projects" class="hover:text-accent transition-colors">Projects</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-6 uppercase tracking-widest text-xs text-foreground/40">Resources</h4>
+                    <ul class="space-y-4 text-foreground/50 text-sm font-medium">
+                        <li><a href="#" class="hover:text-accent transition-colors">Case Studies</a></li>
+                        <li><a href="#" class="hover:text-accent transition-colors">Technical Blog</a></li>
+                        <li><a href="#" class="hover:text-accent transition-colors">Resume Download</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div
+                class="flex flex-col md:flex-row items-center justify-between text-foreground/30 text-xs gap-4 pt-10 border-t border-white/5">
+                <p>&copy; 2026 THARUSHA ARUNALU. Created with <span class="text-accent">♥</span> for the digital age.
+                </p>
+                <div class="flex space-x-6">
+                    <p class="font-mono opacity-50">v2.4.0</p>
+                    <div class="flex items-center gap-2">
+                        <span class="w-2 h-2 rounded-full bg-accent animate-pulse"></span>
+                        <span>Uptime: 99.9%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal -->
+    <div id="info-modal"
+        class="modal-container hidden fixed inset-0 z-[100] items-center justify-center p-6 bg-black/80 backdrop-blur-xl">
+        <div class="glass max-w-lg w-full p-10 rounded-[2.5rem] relative reveal">
+            <button data-modal-close class="absolute top-6 right-6 text-white/40 hover:text-white transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+            <h2 class="text-3xl font-black mb-6">Welcome to Potporli</h2>
+            <p class="text-white/60 leading-relaxed mb-8">
+                Potporli is a design-first ecosystem built for developers who care about aesthetics and performance. Our
+                mission is to bridge the gap between complex engineering and beautiful UI.
+            </p>
+            <div class="space-y-4 mb-10">
+                <div class="flex items-start gap-4">
+                    <div class="w-6 h-6 rounded-full bg-primary/20 flex items-center justify-center text-primary mt-1">✓
+                    </div>
+                    <p class="text-sm font-medium">Modular Architecture</p>
+                </div>
+                <div class="flex items-start gap-4">
+                    <div
+                        class="w-6 h-6 rounded-full bg-secondary/20 flex items-center justify-center text-secondary mt-1">
+                        ✓</div>
+                    <p class="text-sm font-medium">Fluid Interactions</p>
+                </div>
+                <div class="flex items-start gap-4">
+                    <div class="w-6 h-6 rounded-full bg-accent/20 flex items-center justify-center text-accent mt-1">✓
+                    </div>
+                    <p class="text-sm font-medium">Ultra-Fast Loading</p>
+                </div>
+            </div>
+            <button data-modal-close
+                class="w-full py-4 rounded-2xl bg-gradient-to-r from-primary to-secondary font-bold hover:opacity-90 active:scale-95 transition-all">
+                Got it!
+            </button>
+        </div>
+    </div>
+
+    <script src="src/scripts/app.js"></script>
+</body>
+
+</html>

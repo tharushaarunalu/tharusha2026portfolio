@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us | Potporli</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="src/styles/main.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: 'hsl(var(--primary))',
+                        secondary: 'hsl(var(--secondary))',
+                        accent: 'hsl(var(--accent))',
+                        background: 'hsl(var(--background))',
+                        foreground: 'hsl(var(--foreground))',
+                    },
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="bg-background text-foreground">
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 glass border-b border-white/5 px-6 py-4">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <a href="index.html" class="text-2xl font-extrabold tracking-tighter gradient-text">POTPORLI</a>
+            <div class="hidden md:flex items-center space-x-8 text-sm font-medium">
+                <a href="index.html" class="hover:text-primary transition-colors">Home</a>
+                <a href="index.html#services" class="hover:text-primary transition-colors">Services</a>
+                <a href="about.html" class="text-primary">About</a>
+                <a href="contact.html" class="hover:text-primary transition-colors">Contact</a>
+
+                <!-- Theme Toggle Desktop -->
+                <button
+                    class="theme-toggle w-10 h-10 rounded-full glass border border-white/10 flex items-center justify-center hover:border-primary/50 transition-all">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="sun-icon h-5 w-5" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m12.728 0l-.707-.707M6.343 6.343l-.707-.707M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="moon-icon h-5 w-5 hidden" fill="none"
+                        viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                    </svg>
+                </button>
+            </div>
+            <button id="mobile-menu-btn" class="md:hidden text-white/70 hover:text-white">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                </svg>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Sidebar & Overlay -->
+    <div id="overlay" class="hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-[59]"></div>
+    <aside id="sidebar"
+        class="fixed top-0 left-0 h-full w-80 glass-dark z-[60] -translate-x-full transition-transform duration-300 p-8 flex flex-col">
+        <div class="flex items-center justify-between mb-12">
+            <span class="text-xl font-bold gradient-text">POTPORLI</span>
+            <!-- Theme Toggle Mobile -->
+            <button
+                class="theme-toggle w-10 h-10 rounded-full glass border border-white/10 flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="sun-icon h-5 w-5 text-white" fill="none"
+                    viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m12.728 0l-.707-.707M6.343 6.343l-.707-.707M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+                <svg xmlns="http://www.w3.org/2000/svg" class="moon-icon h-5 w-5 hidden" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                </svg>
+            </button>
+        </div>
+        <div class="flex flex-col space-y-6 text-lg">
+            <a href="index.html" class="hover:text-primary transition-colors">Home</a>
+            <a href="index.html#services" class="hover:text-primary transition-colors">Services</a>
+            <a href="about.html" class="text-primary">About</a>
+            <a href="contact.html" class="hover:text-primary transition-colors">Contact</a>
+        </div>
+    </aside>
+
+    <main class="pt-32 pb-20 px-6">
+        <div class="max-w-4xl mx-auto reveal">
+            <h1 class="text-5xl md:text-7xl font-black tracking-tighter mb-12 leading-tight">
+                Our Story & <br><span class="gradient-text">Philosophy</span>
+            </h1>
+            <div class="glass p-8 md:p-12 rounded-[2.5rem] mb-12">
+                <p class="text-xl text-white/70 leading-relaxed mb-6">
+                    Potporli was born out of a desire to redefine how web platforms are built. In a world of generic
+                    templates and bloated frameworks, we chose a path of precision, aesthetics, and pure performance.
+                </p>
+                <p class="text-white/50 leading-relaxed">
+                    Designed by Tharusha Arunalu, Potporli is more than just a template; it's an interactive experience
+                    designed to captivate and convert. We believe that every pixel should serve a purpose, and every
+                    interaction should feel natural.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="glass p-8 rounded-3xl">
+                    <h3 class="text-2xl font-bold mb-4">The Vision</h3>
+                    <p class="text-white/50 text-sm leading-relaxed">
+                        To empower developers and creators with tools that don't compromise on beauty or speed.
+                    </p>
+                </div>
+                <div class="glass p-8 rounded-3xl">
+                    <h3 class="text-2xl font-bold mb-4">The Mission</h3>
+                    <p class="text-white/50 text-sm leading-relaxed">
+                        Setting the standard for the next generation of web interaction and modular design architecture.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="src/scripts/app.js"></script>
+</body>
+
+</html>
