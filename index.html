@@ -11,6 +11,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
         rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.160.0/three.min.js"></script>
     <script>
         tailwind.config = {
             theme: {
@@ -151,10 +152,12 @@
     <main>
         <!-- Hero Section -->
         <section id="hero" class="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
-            <!-- Background Image with Overlay -->
-            <div class="absolute inset-0 z-0">
-                <img src="src/assets/hero_illustration.png" alt="Engineering Logic" class="w-full h-full object-cover">
-                <div class="absolute inset-0 bg-gradient-to-b from-background/60 via-background/80 to-background"></div>
+            <!-- Background Canvas for Sparks -->
+            <canvas id="sparks-canvas" class="absolute inset-0 z-0"></canvas>
+
+            <!-- Background Image with Overlay (Removed illustration) -->
+            <div class="absolute inset-0 z-0 pointer-events-none">
+                <div class="absolute inset-0 bg-gradient-to-b from-background/40 via-background/60 to-background"></div>
             </div>
 
             <div class="relative z-10 max-w-5xl mx-auto px-6 text-center reveal">
@@ -248,23 +251,28 @@
                                 in **Precision, Performance, and Purpose**. Whether it's architecting a microservices
                                 backend or crafting a fluid UI interaction, I focus on the ROI of design.
                             </p>
-                            <ul class="space-y-4">
-                                <li class="flex items-center gap-3">
-                                    <div class="w-2 h-2 rounded-full bg-accent shadow-[0_0_10px_var(--spark-blue)]">
-                                    </div>
-                                    <span class="text-sm font-medium">Scalable Systems Architecture</span>
-                                </li>
-                                <li class="flex items-center gap-3">
-                                    <div class="w-2 h-2 rounded-full bg-accent shadow-[0_0_10px_var(--spark-blue)]">
-                                    </div>
-                                    <span class="text-sm font-medium">User-Centric Interactive Design</span>
-                                </li>
-                                <li class="flex items-center gap-3">
-                                    <div class="w-2 h-2 rounded-full bg-accent shadow-[0_0_10px_var(--spark-blue)]">
-                                    </div>
-                                    <span class="text-sm font-medium">Cloud-Native Specialization (AWS/Docker)</span>
-                                </li>
                             </ul>
+                            <div class="mt-8 pt-8 border-t border-white/5">
+                                <h4 class="text-sm font-bold uppercase tracking-widest text-foreground/40 mb-4">
+                                    Education</h4>
+                                <div class="flex gap-4 items-start">
+                                    <div
+                                        class="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary shrink-0">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M12 14l9-5-9-5-9 5 9 5z" />
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" />
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" />
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <p class="text-white font-bold">BICT Honours</p>
+                                        <p class="text-xs text-foreground/50">University of Jaffna Vavuniya campus</p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -707,31 +715,52 @@
 
                         <div class="space-y-8">
                             <div class="flex items-center gap-6 group">
-                                <div
-                                    class="w-12 h-12 rounded-2xl glass border-white/5 flex items-center justify-center text-accent group-hover:scale-110 transition-transform">
-                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                                    </svg>
-                                </div>
-                                <div>
-                                    <p class="text-xs font-bold uppercase tracking-widest text-foreground/40 mb-1">Email
-                                    </p>
-                                    <p class="text-lg font-bold">hello@tharusha.io</p>
-                                </div>
+                                <a href="mailto:tharushaarunalu17@gmail.com" class="flex items-center gap-6">
+                                    <div
+                                        class="w-12 h-12 rounded-2xl glass border-white/5 flex items-center justify-center text-accent group-hover:scale-110 transition-transform">
+                                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <p class="text-xs font-bold uppercase tracking-widest text-foreground/40 mb-1">
+                                            Email
+                                        </p>
+                                        <p class="text-lg font-bold">tharushaarunalu17@gmail.com</p>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="flex items-center gap-6 group">
+                                <a href="https://wa.me/94767022174" target="_blank" class="flex items-center gap-6">
+                                    <div
+                                        class="w-12 h-12 rounded-2xl glass border-white/5 flex items-center justify-center text-green-500 group-hover:scale-110 transition-transform">
+                                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                            <path
+                                                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.335-1.662c1.72.937 3.659 1.431 5.63 1.432h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <p class="text-xs font-bold uppercase tracking-widest text-foreground/40 mb-1">
+                                            WhatsApp</p>
+                                        <p class="text-lg font-bold">+94 76 702 2174</p>
+                                    </div>
+                                </a>
                             </div>
                             <div class="flex items-center gap-6 group">
                                 <div
                                     class="w-12 h-12 rounded-2xl glass border-white/5 flex items-center justify-center text-secondary group-hover:scale-110 transition-transform">
-                                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                                        <path
-                                            d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                                     </svg>
                                 </div>
                                 <div>
                                     <p class="text-xs font-bold uppercase tracking-widest text-foreground/40 mb-1">
-                                        LinkedIn</p>
-                                    <p class="text-lg font-bold">in/tharushaarunalu</p>
+                                        Location</p>
+                                    <p class="text-lg font-bold">Maharagama, Sri Lanka</p>
                                 </div>
                             </div>
                         </div>
@@ -789,11 +818,11 @@
                                     d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.43.372.823 1.102.823 2.222 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" />
                             </svg>
                         </a>
-                        <a href="#"
+                        <a href="https://web.facebook.com/tharusha.arunalu/?_rdc=1&_rdr#" target="_blank"
                             class="w-10 h-10 rounded-full glass border-white/10 flex items-center justify-center hover:bg-accent hover:text-white transition-all">
                             <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
                                 <path
-                                    d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+                                    d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
                             </svg>
                         </a>
                     </div>
@@ -871,7 +900,8 @@
         </div>
     </div>
 
-    <script src="src/scripts/app.js"></script>
+    <script src="src/script/app.js"></script>
+    <script src="src/script/sparks.js"></script>
 </body>
 
 </html>

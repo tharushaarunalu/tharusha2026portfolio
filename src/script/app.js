@@ -129,4 +129,22 @@ document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('.reveal').forEach(el => {
     observer.observe(el);
   });
+
+  // Load about content from secure backend API
+  async function loadAbout() {
+    try {
+      const res = await fetch('/api/about');
+      if (!res.ok) throw new Error('Network response was not ok');
+      const data = await res.json();
+      const el = document.getElementById('about-dynamic');
+      if (el && data.page) {
+        el.innerHTML = `<h2 class="text-3xl font-bold mb-4">${data.page.title}</h2><div class="text-white/70 leading-relaxed">${data.page.content}</div>`;
+        el.classList.remove('hidden');
+      }
+    } catch (err) {
+      console.warn('Could not load about content:', err);
+    }
+  }
+
+  loadAbout();
 });
